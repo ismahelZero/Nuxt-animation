@@ -7,16 +7,17 @@
     <LoadingScreen v-if="isLoading" @loaded="handleLoaded" />
 
     <!-- Main Content -->
-    <div v-show="!isLoading" class="relative z-10">
+    <div
+      v-show="!isLoading"
+      :class="{ 'opacity-0': isLoading }"
+      class="relative z-10 transition-opacity duration-1000 ease-in-out"
+    >
       <!-- Navigation -->
       <Navigation />
-
       <!-- Hero Section -->
       <HeroSection />
-
       <!-- About Section -->
       <AboutSection />
-
       <!-- Projects Section -->
       <ProjectsSection />
     </div>
@@ -37,7 +38,6 @@ import { useSeoMeta } from 'nuxt/app'
 
 const isLoading = ref(true)
 const threeCanvas = ref<HTMLCanvasElement>()
-
 const { initLenis } = useLenis()
 const { initScene, updateScrollProgress, dispose } = useThreeScene()
 const { initScrollAnimations } = useScrollAnimations()
@@ -50,7 +50,7 @@ const handleLoaded = () => {
     nextTick(() => {
       initializeApp()
     })
-  }, 1000)
+  }, 500)
 }
 
 const initializeApp = () => {
@@ -70,12 +70,11 @@ const initializeApp = () => {
 }
 
 onMounted(() => {
-  // Auto-hide loading screen after 3 seconds as fallback
   setTimeout(() => {
     if (isLoading.value) {
       handleLoaded()
     }
-  }, 3000)
+  }, 8000)
 })
 
 onUnmounted(() => {
@@ -90,7 +89,7 @@ useSeoMeta({
     'A stunning animated portfolio showcasing creative web development with Three.js and smooth scrolling effects.',
   ogTitle: 'Animated Portfolio',
   ogDescription: 'Creative developer portfolio with amazing animations',
-  ogImage: '/og-image.jpg',
+  ogImage: '../assets/transparent-logo.png',
   twitterCard: 'summary_large_image'
 })
 </script>
@@ -99,5 +98,10 @@ useSeoMeta({
 #app {
   min-height: 100vh;
   position: relative;
+}
+
+/* Ensure smooth transitions */
+#three-canvas {
+  transition: opacity 0.5s ease-in-out;
 }
 </style>

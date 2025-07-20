@@ -1,106 +1,199 @@
 <template>
-  <div class="fixed inset-0 z-50 flex items-center justify-center bg-dark">
-    <div class="text-center">
-      <!-- Animated Logo -->
-      <div class="relative mb-8">
+  <div
+    :style="backgroundStyle"
+    class="fixed inset-0 z-50 flex flex-col items-center justify-center transition-all duration-1000 ease-in-out"
+  >
+    <!-- Logo Container -->
+    <div class="flex flex-1 flex-col items-center justify-center">
+      <div
+        :style="logoContainerStyle"
+        class="fixed inset-0 flex items-center justify-center transition-all duration-1000 ease-in-out"
+      >
         <div
-          class="relative mx-auto h-20 w-20 overflow-hidden rounded-full border-4 border-accent"
-        >
-          <div
-            class="animate-spin-slow absolute inset-0 bg-gradient-to-r from-accent to-accent-light opacity-20"
-          />
-          <div
-            class="absolute inset-2 flex items-center justify-center rounded-full bg-dark"
-          >
-            <div class="text-xl font-bold text-accent">P</div>
+          :class="logoMaskClass"
+          class="relative select-none transition-all duration-1000 ease-in-out"
+        />
+      </div>
+    </div>
+
+    <!-- Bottom Section with Loading and Progress -->
+    <div class="absolute bottom-0 left-0 right-0 pb-16">
+      <!-- Loading Text -->
+      <div
+        :class="{ 'opacity-0': isCompleting }"
+        class="mb-8 flex justify-between px-16 font-light tracking-widest text-white transition-opacity duration-500"
+      >
+        <h2 class="text-lg">LOADING</h2>
+
+        <h2 class="text-3xl">{{ animatedProgress }}%</h2>
+      </div>
+
+      <!-- Progress Container -->
+      <div
+        v-if="showProgressBar"
+        :class="{ 'opacity-0': isCompleting }"
+        class="px-16 transition-opacity duration-500"
+      >
+        <!-- Progress Bar -->
+        <div class="relative mb-6">
+          <div class="h-1 w-full overflow-hidden rounded-full bg-gray-800">
+            <div
+              :style="{ width: `${displayProgress}%` }"
+              class="h-full rounded-full bg-white transition-all duration-300 ease-out"
+            />
           </div>
         </div>
       </div>
-
-      <!-- Loading Text -->
-      <h1 class="loading-text mb-4 text-4xl font-bold">
-        {{ loadingText }}
-      </h1>
-
-      <!-- Progress Bar -->
-      <div
-        class="mx-auto mb-4 h-1 w-64 overflow-hidden rounded-full bg-dark-secondary"
-      >
-        <div
-          :style="{ width: `${progress}%` }"
-          class="h-full rounded-full bg-gradient-to-r from-accent to-accent-light transition-all duration-300 ease-out"
-        />
-      </div>
-
-      <!-- Progress Percentage -->
-      <div class="text-sm text-gray-400">{{ Math.round(progress) }}%</div>
-    </div>
-
-    <!-- Background Animation -->
-    <div class="pointer-events-none absolute inset-0 overflow-hidden">
-      <div
-        v-for="i in 20"
-        :key="i"
-        :style="{
-          left: Math.random() * 100 + '%',
-          top: Math.random() * 100 + '%',
-          animationDelay: Math.random() * 2 + 's',
-          animationDuration: Math.random() * 2 + 2 + 's'
-        }"
-        class="absolute h-2 w-2 animate-float rounded-full bg-accent opacity-20"
-      />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 
 const emit = defineEmits<{
   loaded: []
 }>()
 
-const progress = ref(0)
-const loadingText = ref<string | undefined>('Initializing...')
+// State
+const displayProgress = ref(0)
+const animatedProgress = ref(0)
+const isLogoGrowing = ref(false)
+const isLogoExpanded = ref(false)
+const showProgressBar = ref(false)
+const isCompleting = ref(false)
+const showGif = ref(false)
+const isProgressAnimating = ref(false)
 
-const loadingStages = [
-  { text: 'Initializing...', duration: 500 },
-  { text: 'Loading Assets...', duration: 800 },
-  { text: 'Setting up Scene...', duration: 600 },
-  { text: 'Preparing Animations...', duration: 700 },
-  { text: 'Almost Ready...', duration: 400 }
-]
+// Background & logo scaling
+const backgroundColor = ref('white')
+const logoScale = ref(2)
+
+// Computed background style
+const backgroundStyle = computed(() => ({
+  backgroundColor: backgroundColor.value,
+  transition: 'background-color 1s ease-in-out'
+}))
+
+const logoContainerStyle = computed(() => ({
+  transform: `scale(${logoScale.value})`,
+  transition: isCompleting.value
+    ? 'transform 2s cubic-bezier(0.2, 1, 0.3, 1)'
+    : 'transform 1s cubic-bezier(0.4, 0, 0.2, 1)'
+}))
+
+const logoMaskClass = computed(() => {
+  const classes = ['logo-masked']
+
+  if (isCompleting.value) {
+    classes.push('logo-completing')
+  } else if (isLogoExpanded.value) {
+    classes.push('logo-expanded')
+  } else if (isLogoGrowing.value && showGif.value) {
+    classes.push('logo-growing')
+  }
+
+  return classes.join(' ')
+})
+
+// Animate progress bar
+watch(displayProgress, (newVal, oldVal) => {
+  if (newVal > oldVal && newVal % 10 === 0) {
+    isProgressAnimating.value = true
+    setTimeout(() => {
+      isProgressAnimating.value = false
+    }, 300)
+  }
+})
 
 onMounted(() => {
   simulateLoading()
 })
 
 const simulateLoading = () => {
-  let currentStage = 0
-  let currentProgress = 0
+  // Phase 1: Show logo & white background
+  setTimeout(() => {
+    isLogoGrowing.value = true
+    showGif.value = true
+  }, 100)
 
-  const progressInterval = setInterval(() => {
-    if (currentStage < loadingStages.length) {
-      const stage = loadingStages[currentStage]
-      const stageProgress = 100 / loadingStages.length
-      const targetProgress = (currentStage + 1) * stageProgress
+  // Phase 2: Dark background + expand logo + show progress
+  setTimeout(() => {
+    backgroundColor.value = '#0f0f0f'
+    logoScale.value = 2.5
+    isLogoExpanded.value = true
+    showProgressBar.value = true
+    startProgressAnimation()
+  }, 1000)
+}
 
-      loadingText.value = stage?.text
+const startProgressAnimation = () => {
+  const duration = 3000
+  const startTime = Date.now()
 
-      if (currentProgress < targetProgress) {
-        currentProgress += Math.random() * 3 + 1
-        progress.value = Math.min(currentProgress, targetProgress)
-      } else {
-        currentStage++
-        if (currentStage >= loadingStages.length) {
-          progress.value = 100
-          clearInterval(progressInterval)
-          setTimeout(() => {
-            emit('loaded')
-          }, 500)
-        }
-      }
+  const animate = () => {
+    const elapsed = Date.now() - startTime
+    const progress = Math.min((elapsed / duration) * 100, 100)
+
+    displayProgress.value = progress
+    animatedProgress.value = Math.floor(progress)
+
+    if (progress < 100) {
+      requestAnimationFrame(animate)
+    } else {
+      completeLoading()
     }
-  }, 50)
+  }
+
+  requestAnimationFrame(animate)
+}
+
+const completeLoading = () => {
+  displayProgress.value = 100
+  animatedProgress.value = 100
+
+  setTimeout(() => {
+    isCompleting.value = true
+
+    setTimeout(() => {
+      emit('loaded')
+    }, 100)
+  }, 100)
 }
 </script>
+
+<style scoped>
+.logo-masked {
+  background: url('@/assets/images/anime.gif') center center / cover no-repeat;
+  mask-image: url('@/assets/images/logo.png');
+  -webkit-mask-image: url('@/assets/images/logo.png');
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-size: cover;
+  -webkit-mask-size: cover;
+}
+
+.logo-growing {
+  width: 120px;
+  height: 120px;
+}
+
+.logo-expanded {
+  width: 180px;
+  height: 180px;
+}
+
+.logo-completing {
+  width: 1000vw;
+  height: 1000vw;
+}
+
+.select-none {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+</style>
