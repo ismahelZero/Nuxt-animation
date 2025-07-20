@@ -9,6 +9,12 @@ export default defineNuxtConfig({
     'pinia-plugin-persistedstate/nuxt'
   ],
 
+  // Explicit alias configuration
+  alias: {
+    '@': '..',
+    '~': '..'
+  },
+
   // i18n configuration
   i18n: {
     locales: ['en', 'ar'],
@@ -27,8 +33,36 @@ export default defineNuxtConfig({
     storesDirs: ['./stores/**']
   },
 
-  // Explicitly configure vue-tsc
+  // CSS configuration
+  css: ['~/assets/css/main.css'],
+
+  // Build configuration
   build: {
-    transpile: ['vue']
+    transpile: ['three', 'gsap']
+  },
+
+  // Vite configuration for Three.js
+  vite: {
+    optimizeDeps: {
+      include: ['three']
+    },
+    ssr: {
+      noExternal: ['three']
+    }
+  },
+
+  // App configuration
+  app: {
+    head: {
+      title: 'Animated Portfolio',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          name: 'description',
+          content: 'Animated portfolio with Three.js and Lenis'
+        }
+      ]
+    }
   }
 })

@@ -9,6 +9,10 @@
       "ESNext.AsyncIterable",
       "DOM"
     ],
+    "types": [
+      "vite/client",
+      "node"
+    ],
     "esModuleInterop": true,
     "allowJs": true,
     "sourceMap": true,
@@ -19,21 +23,11 @@
     "removeComments": true,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "types": [
-      "vite/client",
-      "node"
-    ],
     "paths": {
-      "#app": [
-        "./.nuxt/types/app.d.ts"
-      ],
-      "#imports": [
-        "./.nuxt/imports.d.ts"
-      ],
-      "~/*": [
+      "@/*": [
         "./*"
       ],
-      "@/*": [
+      "~/*": [
         "./*"
       ]
     }
@@ -42,10 +36,11 @@
     "**/*.ts",
     "**/*.d.ts",
     "**/*.tsx",
-    "**/*.vue",
-    ".nuxt/**/*"
+    "**/*.vue"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".nuxt",
+    "dist"
   ]
 }
