@@ -164,7 +164,7 @@ const completeLoading = () => {
 
 <style scoped>
 .logo-masked {
-  background: url('@/assets/images/anime.gif') center center / cover no-repeat;
+  background: url('@/assets/images/anime.gif') no-repeat fixed center center;
   mask-image: url('@/assets/images/logo.png');
   -webkit-mask-image: url('@/assets/images/logo.png');
   mask-repeat: no-repeat;
