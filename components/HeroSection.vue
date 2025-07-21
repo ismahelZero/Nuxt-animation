@@ -3,138 +3,131 @@
     id="hero"
     class="relative flex min-h-screen items-center justify-center overflow-hidden"
   >
+    <!-- Animated Background -->
+    <div class="absolute inset-0 z-0">
+      <img
+        alt="Animated background"
+        class="h-full w-full object-cover"
+        src="@/assets/images/anime.gif"
+      />
+      <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+    </div>
+
     <!-- Content -->
     <div class="container relative z-10 mx-auto px-6 text-center">
       <div class="mx-auto max-w-4xl">
         <!-- Main Title -->
         <h1 class="reveal mb-6 text-6xl font-bold md:text-8xl">
-          <span class="gradient-text animate-text">Creative</span>
-          <br />
           <span class="animate-text text-white">Developer</span>
+          <span
+            class="name-animation ml-4 inline-block overflow-hidden text-white"
+          >
+            <span class="name-block">Ismahel</span>
+            <span class="name-block">Zero</span>
+            <span class="name-block">Sadradin</span>
+          </span>
         </h1>
-
-        <!-- Subtitle -->
-        <p
-          class="reveal mb-8 text-xl text-gray-300 md:text-2xl"
-          style="animation-delay: 0.3s"
-        >
-          Bringing ideas to life through innovative web experiences
-        </p>
-
-        <!-- Description -->
-        <p
-          class="reveal mx-auto mb-12 max-w-2xl text-lg text-gray-400"
-          style="animation-delay: 0.6s"
-        >
-          Passionate full-stack developer specializing in modern web
-          technologies, creating stunning visual experiences with seamless
-          functionality.
-        </p>
 
         <!-- CTA Buttons -->
         <div
-          class="reveal flex flex-col justify-center gap-4 sm:flex-row"
+          class="reveal flex flex-col items-center justify-center gap-6 sm:flex-row"
           style="animation-delay: 0.9s"
         >
+          <!-- First Button with arrow transformation -->
           <button
-            class="transform animate-glow rounded-lg bg-accent px-8 py-4 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-accent-light hover:shadow-xl"
-            @click="scrollToProjects"
+            class="btn-arrow group relative flex items-center justify-center overflow-hidden rounded-full border-2 border-white bg-transparent px-8 py-4 font-semibold text-white transition-all duration-500 hover:border-accent hover:bg-accent hover:pe-6 hover:ps-12"
           >
-            View My Work
+            <span
+              class="dot absolute left-4 h-3 w-3 rounded-full bg-white transition-all duration-300 group-hover:left-6 group-hover:h-5 group-hover:w-5"
+            />
+            <span class="text ms-2">Explore our journey</span>
+            <span
+              class="arrow absolute left-6 opacity-0 transition-all duration-300 group-hover:right-6 group-hover:opacity-100"
+            >
+              <svg
+                class="h-5 w-5"
+                fill="black"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </span>
           </button>
+
+          <!-- Second Button with text animation -->
           <button
-            class="glass transform rounded-lg px-8 py-4 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-white hover:bg-opacity-10"
-            @click="scrollToContact"
+            class="btn-text-overlap group relative flex items-center justify-center overflow-hidden rounded-full border-2 border-white bg-transparent px-8 py-4 font-semibold text-white transition-all duration-500 hover:border-accent"
           >
-            Get In Touch
+            <span
+              class="dot absolute left-4 h-3 w-3 rounded-full bg-white transition-all duration-300 group-hover:bg-accent"
+            />
+            <div class="relative overflow-hidden">
+              <span
+                class="block text-current transition-all duration-500 group-hover:-translate-y-full"
+                >Let's talk</span
+              >
+              <span
+                class="text-new absolute left-0 top-full block w-full transition-all duration-500 group-hover:-translate-y-full"
+                >Let's talk</span
+              >
+            </div>
           </button>
         </div>
       </div>
-
-      <!-- Floating Elements -->
-      <div class="pointer-events-none absolute inset-0">
-        <div
-          class="floating-element absolute left-10 top-20 h-4 w-4 animate-float rounded-full bg-accent opacity-60"
-          style="animation-delay: 0s"
-        />
-        <div
-          class="floating-element absolute right-20 top-40 h-6 w-6 animate-float rounded-full bg-accent-light opacity-40"
-          style="animation-delay: 1s"
-        />
-        <div
-          class="floating-element absolute bottom-40 left-20 h-3 w-3 animate-float rounded-full bg-white opacity-50"
-          style="animation-delay: 2s"
-        />
-        <div
-          class="floating-element absolute bottom-20 right-10 h-5 w-5 animate-float rounded-full bg-accent opacity-30"
-          style="animation-delay: 0.5s"
-        />
-      </div>
-    </div>
-
-    <!-- Scroll Indicator -->
-    <div
-      class="absolute bottom-8 left-1/2 -translate-x-1/2 transform animate-bounce"
-    >
-      <div
-        class="flex h-10 w-6 justify-center rounded-full border-2 border-white"
-      >
-        <div class="mt-2 h-3 w-1 animate-pulse rounded-full bg-white" />
-      </div>
-      <p class="mt-2 text-sm text-white">Scroll Down</p>
-    </div>
-
-    <!-- Background Pattern -->
-    <div class="absolute inset-0 opacity-5">
-      <div
-        class="absolute inset-0"
-        style="
-          background-image: radial-gradient(
-            circle at 1px 1px,
-            white 1px,
-            transparent 0
-          );
-          background-size: 50px 50px;
-        "
-      />
     </div>
   </section>
 </template>
 
 <script lang="ts" setup>
-import { useLenis } from '../composables/useLenis'
+import { onMounted } from 'vue'
+import gsap from 'gsap'
 
-const { scrollTo } = useLenis()
-
-const scrollToProjects = () => {
-  scrollTo('#projects', {
-    offset: -80,
-    duration: 1.5
+onMounted(() => {
+  const nameBlocks = gsap.utils.toArray('.name-block') as HTMLElement[]
+  let tl = gsap.timeline({
+    repeat: -1,
+    defaults: { duration: 0.7, ease: 'power2.inOut' }
   })
-}
 
-const scrollToContact = () => {
-  scrollTo('#contact', {
-    offset: -80,
-    duration: 1.5
+  nameBlocks.forEach((block, index) => {
+    tl.to(block, { y: '0%', opacity: 1 }).to(
+      block,
+      { y: '-100%', opacity: 0, delay: 0.5, display: 'none' },
+      '+=0.5'
+    )
   })
-}
+})
 </script>
 
 <style scoped>
-.floating-element {
-  animation-duration: 3s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
+.name-animation {
+  height: 1.2em;
+  vertical-align: bottom;
+  overflow: hidden;
+  color: theme('colors.accent');
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(180deg);
-  }
+.name-block {
+  display: block;
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.btn-arrow,
+.btn-text-overlap {
+  min-width: 200px;
+}
+
+.dot {
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.text-new {
+  color: theme('colors.accent');
 }
 </style>

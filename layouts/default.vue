@@ -8,18 +8,16 @@
 
     <!-- Main Content -->
     <div
-      v-show="!isLoading"
+      v-if="!isLoading"
       :class="{ 'opacity-0': isLoading }"
       class="relative z-10 transition-opacity duration-1000 ease-in-out"
     >
-      <!-- Navigation -->
+      <!-- Navigation will appear when scrolling down -->
       <Navigation />
-      <!-- Hero Section -->
-      <HeroSection />
-      <!-- About Section -->
-      <AboutSection />
-      <!-- Projects Section -->
-      <ProjectsSection />
+
+      <main class="relative">
+        <slot />
+      </main>
     </div>
   </div>
 </template>
@@ -31,9 +29,6 @@ import { useScrollAnimations } from '@/composables/useScrollAnimations'
 import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 import LoadingScreen from '@/components/LoadingScreen.vue'
 import Navigation from '@/components/Navigation.vue'
-import HeroSection from '@/components/HeroSection.vue'
-import AboutSection from '@/components/AboutSection.vue'
-import ProjectsSection from '@/components/ProjectsSection.vue'
 import { useSeoMeta } from 'nuxt/app'
 
 const isLoading = ref(true)

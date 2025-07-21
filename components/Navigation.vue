@@ -1,7 +1,7 @@
 <template>
   <nav
     :class="navClasses"
-    class="fixed left-0 right-0 top-0 z-40 transition-all duration-300"
+    class="fixed left-0 right-0 top-0 z-40 transform transition-transform duration-500 ease-in-out"
   >
     <div class="container mx-auto px-6 py-4">
       <div class="flex items-center justify-between">
@@ -78,13 +78,15 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref } from 'vue'
-import { useLenis } from '../composables/useLenis'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { useLenis } from '@/composables/useLenis'
 
 const { scrollTo } = useLenis()
 
-const isScrolled = ref(false)
 const isMobileMenuOpen = ref(false)
+const isScrolled = ref(false)
+const isNavVisible = ref(true)
+const lastScrollY = ref(0)
 
 const menuItems = [
   { id: 1, label: 'Home', href: '#hero' },
@@ -95,8 +97,9 @@ const menuItems = [
 ]
 
 const navClasses = computed(() => ({
-  glass: isScrolled.value,
-  'bg-transparent': !isScrolled.value
+  'bg-transparent': !isScrolled.value,
+  'translate-y-0': isNavVisible.value,
+  '-translate-y-full': !isNavVisible.value
 }))
 
 const toggleMobileMenu = () => {
@@ -105,19 +108,33 @@ const toggleMobileMenu = () => {
 
 const scrollToSection = (href: string, event: Event) => {
   event.preventDefault()
-  const target = href.substring(1) // Remove # from href
+  const target = href.substring(1)
   scrollTo(`#${target}`, {
-    offset: -80,
-    duration: 1.5
+    offset: -100,
+    duration: 100
   })
+  isMobileMenuOpen.value = false
 }
 
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 50
+  const currentScroll = window.scrollY
+  isScrolled.value = currentScroll > 50
+  isNavVisible.value = !(
+    currentScroll > lastScrollY.value && currentScroll > 100
+  )
+  lastScrollY.value = currentScroll
+}
+
+const handleVisible = () => {
+  setTimeout(() => {
+    isNavVisible.value = true
+  }, 100)
 }
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+  isNavVisible.value = false
+  handleVisible()
 })
 
 onUnmounted(() => {

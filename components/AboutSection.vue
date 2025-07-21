@@ -4,18 +4,18 @@
       <div class="grid items-center gap-16 lg:grid-cols-2">
         <!-- Text Content -->
         <div class="space-y-8">
-          <div class="reveal">
+          <div ref="titleContainer" class="reveal">
             <h2 class="mb-6 text-5xl font-bold">
-              <span class="gradient-text">About</span>
-              <span class="text-white"> Me</span>
+              <span ref="aboutText" class="gradient-text">About</span>
+              <span ref="meText" class="text-white"> Me</span>
             </h2>
           </div>
 
           <div
+            ref="textContent"
             class="reveal space-y-6 text-lg leading-relaxed text-gray-300"
-            style="animation-delay: 0.2s"
           >
-            <p>
+            <p ref="paragraph1">
               I'm a passionate full-stack developer with over 5 years of
               experience creating exceptional digital experiences. My journey
               began with a curiosity about how things work on the web, which
@@ -23,7 +23,7 @@
               applications.
             </p>
 
-            <p>
+            <p ref="paragraph2">
               I specialize in modern web technologies including React, Vue.js,
               Node.js, and various database systems. My approach combines
               technical expertise with creative problem-solving to deliver
@@ -31,46 +31,43 @@
               delightful user experiences.
             </p>
 
-            <p>
+            <p ref="paragraph3">
               When I'm not coding, you can find me exploring new technologies,
               contributing to open-source projects, or sharing knowledge with
               the developer community through blog posts and tutorials.
             </p>
           </div>
 
-          <div
-            class="reveal flex flex-wrap gap-4"
-            style="animation-delay: 0.4s"
-          >
-            <div class="glass rounded-lg px-4 py-2">
-              <span class="text-accent font-semibold">5+</span>
+          <div ref="statsContainer" class="reveal flex flex-wrap gap-4">
+            <div ref="stat1" class="glass rounded-lg px-4 py-2">
+              <span class="font-semibold text-accent">5+</span>
               <span class="ml-2 text-gray-300">Years Experience</span>
             </div>
-            <div class="glass rounded-lg px-4 py-2">
-              <span class="text-accent font-semibold">100+</span>
+            <div ref="stat2" class="glass rounded-lg px-4 py-2">
+              <span class="font-semibold text-accent">100+</span>
               <span class="ml-2 text-gray-300">Projects Completed</span>
             </div>
-            <div class="glass rounded-lg px-4 py-2">
-              <span class="text-accent font-semibold">50+</span>
+            <div ref="stat3" class="glass rounded-lg px-4 py-2">
+              <span class="font-semibold text-accent">50+</span>
               <span class="ml-2 text-gray-300">Happy Clients</span>
             </div>
           </div>
         </div>
 
         <!-- Profile Image & Stats -->
-        <div class="reveal relative" style="animation-delay: 0.3s">
+        <div ref="profileContainer" class="reveal relative">
           <div class="relative z-10">
             <!-- Profile Image Container -->
-            <div class="relative mx-auto h-80 w-80">
+            <div ref="profileImage" class="relative mx-auto h-80 w-80">
               <div
-                class="from-accent to-accent-light absolute inset-0 animate-pulse rounded-full bg-gradient-to-r opacity-20"
-              ></div>
+                class="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-accent to-accent-light opacity-20"
+              />
               <div class="glass absolute inset-4 overflow-hidden rounded-full">
                 <div
-                  class="from-accent/20 to-accent-light/20 flex h-full w-full items-center justify-center bg-gradient-to-br"
+                  class="flex h-full w-full items-center justify-center bg-gradient-to-br from-accent/20 to-accent-light/20"
                 >
                   <!-- Placeholder for profile image -->
-                  <div class="text-accent text-8xl opacity-50">
+                  <div class="text-8xl text-accent opacity-50">
                     <Icon name="ph:user-bold" />
                   </div>
                 </div>
@@ -79,59 +76,314 @@
 
             <!-- Floating Skills -->
             <div
-              class="glass animate-float absolute -left-4 -top-4 rounded-lg px-4 py-2"
-              style="animation-delay: 0s"
+              ref="skill1"
+              class="glass skill-tag absolute -left-4 -top-4 rounded-lg px-4 py-2"
             >
-              <span class="text-accent font-semibold">Vue.js</span>
+              <span class="font-semibold text-accent">Vue.js</span>
             </div>
             <div
-              class="glass animate-float absolute -right-8 top-8 rounded-lg px-4 py-2"
-              style="animation-delay: 1s"
+              ref="skill2"
+              class="glass skill-tag absolute -right-8 top-8 rounded-lg px-4 py-2"
             >
-              <span class="text-accent font-semibold">Three.js</span>
+              <span class="font-semibold text-accent">Three.js</span>
             </div>
             <div
-              class="glass animate-float absolute -bottom-8 left-8 rounded-lg px-4 py-2"
-              style="animation-delay: 2s"
+              ref="skill3"
+              class="glass skill-tag absolute -bottom-8 left-8 rounded-lg px-4 py-2"
             >
-              <span class="text-accent font-semibold">Node.js</span>
+              <span class="font-semibold text-accent">Node.js</span>
             </div>
             <div
-              class="glass animate-float absolute -right-12 bottom-0 rounded-lg px-4 py-2"
-              style="animation-delay: 0.5s"
+              ref="skill4"
+              class="glass skill-tag absolute -right-12 bottom-0 rounded-lg px-4 py-2"
             >
-              <span class="text-accent font-semibold">TypeScript</span>
+              <span class="font-semibold text-accent">TypeScript</span>
             </div>
-          </div>
-
-          <!-- Background Decoration -->
-          <div class="absolute inset-0 opacity-10">
-            <div
-              class="border-accent absolute left-0 top-0 h-32 w-32 rounded-full border-4"
-            ></div>
-            <div
-              class="border-accent-light absolute bottom-0 right-0 h-24 w-24 rounded-full border-4"
-            ></div>
-            <div
-              class="absolute left-1/4 top-1/2 h-16 w-16 rounded-full border-2 border-white"
-            ></div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Background Elements -->
-    <div class="pointer-events-none absolute inset-0 overflow-hidden">
-      <div
-        class="bg-accent absolute -right-40 -top-40 h-96 w-96 rounded-full opacity-5 blur-3xl"
-      ></div>
-      <div
-        class="bg-accent-light absolute -bottom-40 -left-40 h-96 w-96 rounded-full opacity-5 blur-3xl"
-      ></div>
-    </div>
   </section>
 </template>
 
-<script setup lang="ts">
-// Component logic here
+<script lang="ts" setup>
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { onMounted, ref } from 'vue'
+import { useLenis } from '@/composables/useLenis' // Register ScrollTrigger plugin
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger)
+
+// Refs for DOM elements
+const titleContainer = ref<HTMLElement | null>(null)
+const aboutText = ref<HTMLElement | null>(null)
+const meText = ref<HTMLElement | null>(null)
+const textContent = ref<HTMLElement | null>(null)
+const paragraph1 = ref<HTMLElement | null>(null)
+const paragraph2 = ref<HTMLElement | null>(null)
+const paragraph3 = ref<HTMLElement | null>(null)
+const statsContainer = ref<HTMLElement | null>(null)
+const stat1 = ref<HTMLElement | null>(null)
+const stat2 = ref<HTMLElement | null>(null)
+const stat3 = ref<HTMLElement | null>(null)
+const profileContainer = ref<HTMLElement | null>(null)
+const profileImage = ref<HTMLElement | null>(null)
+const skill1 = ref<HTMLElement | null>(null)
+const skill2 = ref<HTMLElement | null>(null)
+const skill3 = ref<HTMLElement | null>(null)
+const skill4 = ref<HTMLElement | null>(null)
+
+const { initLenis } = useLenis()
+
+onMounted(() => {
+  // Initialize Lenis smooth scrolling
+  const lenis = initLenis((e: any) => {
+    ScrollTrigger.update()
+  })
+
+  // Set up animations
+  setupAnimations()
+
+  // Refresh ScrollTrigger when images load
+  window.addEventListener('load', () => {
+    ScrollTrigger.refresh()
+  })
+})
+
+function setupAnimations() {
+  // Title animation
+  if (aboutText.value && meText.value) {
+    gsap.fromTo(
+      [aboutText.value, meText.value],
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: titleContainer.value,
+          start: 'top 60%',
+          end: 'top 40%',
+          scrub: 1,
+          toggleActions: 'play none none reverse'
+        }
+      }
+    )
+  }
+
+  // Paragraph animations
+  if (paragraph1.value && paragraph2.value && paragraph3.value) {
+    gsap.fromTo(
+      [paragraph1.value, paragraph2.value, paragraph3.value],
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: textContent.value,
+          start: 'top 80%',
+          end: 'top 50%',
+          scrub: 1,
+          toggleActions: 'play none none reverse'
+        }
+      }
+    )
+  }
+
+  // Stats container animation
+  if (statsContainer.value) {
+    gsap.fromTo(
+      statsContainer.value,
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: statsContainer.value,
+          start: 'top 80%',
+          end: 'top 50%',
+          scrub: 1,
+          toggleActions: 'play none none reverse'
+        }
+      }
+    )
+  }
+
+  // Individual stats animations
+  if (stat1.value && stat2.value && stat3.value) {
+    gsap.fromTo(
+      [stat1.value, stat2.value, stat3.value],
+      { scale: 0.8, opacity: 0 },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: statsContainer.value,
+          start: 'top 80%',
+          end: 'top 50%',
+          scrub: 1,
+          toggleActions: 'play none none reverse'
+        }
+      }
+    )
+  }
+
+  // Profile container animation
+  if (profileContainer.value) {
+    gsap.fromTo(
+      profileContainer.value,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: profileContainer.value,
+          start: 'top 80%',
+          end: 'top 50%',
+          scrub: 1,
+          toggleActions: 'play none none reverse'
+        }
+      }
+    )
+  }
+
+  // Profile image animation
+  if (profileImage.value) {
+    gsap.fromTo(
+      profileImage.value,
+      { scale: 0.9, opacity: 0 },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: profileImage.value,
+          start: 'top 80%',
+          end: 'top 50%',
+          scrub: 1,
+          toggleActions: 'play none none reverse'
+        }
+      }
+    )
+  }
+
+  // Skill tags shooting animation
+  if (
+    skill1.value &&
+    skill2.value &&
+    skill3.value &&
+    skill4.value &&
+    profileImage.value
+  ) {
+    // Get the center of the profile image
+    const profileRect = profileImage.value.getBoundingClientRect()
+    const centerX = profileRect.width / 2
+    const centerY = profileRect.height / 2
+
+    // Set initial positions (centered behind the avatar)
+    gsap.set([skill1.value], {
+      x: centerX,
+      y: centerY,
+      opacity: 0,
+      transformOrigin: 'center center'
+    })
+    gsap.set([skill2.value], {
+      x: centerX - 400,
+      y: centerY - 100,
+      opacity: 0,
+      transformOrigin: 'center center'
+    })
+    gsap.set([skill3.value], {
+      x: centerX + 100,
+      y: centerY - 300,
+      opacity: 0,
+      transformOrigin: 'center center'
+    })
+    gsap.set([skill4.value], {
+      x: centerX - 400,
+      y: centerY - 300,
+      opacity: 0,
+      transformOrigin: 'center center'
+    })
+
+    // Animate skills from center to their positions
+    gsap.to(skill1.value, {
+      x: -40,
+      y: -40,
+      opacity: 1,
+      duration: 1,
+      scrollTrigger: {
+        trigger: profileContainer.value,
+        start: 'top 80%',
+        end: 'top 30%',
+        scrub: 1,
+        toggleActions: 'play none none reverse'
+      }
+    })
+
+    gsap.to(skill2.value, {
+      x: -20,
+      y: -80,
+      opacity: 1,
+      duration: 1,
+      scrollTrigger: {
+        trigger: profileContainer.value,
+        start: 'top 80%',
+        end: 'top 30%',
+        scrub: 1,
+        toggleActions: 'play none none reverse'
+      }
+    })
+
+    gsap.to(skill3.value, {
+      x: 40,
+      y: 40,
+      opacity: 1,
+      duration: 1,
+      scrollTrigger: {
+        trigger: profileContainer.value,
+        start: 'top 80%',
+        end: 'top 30%',
+        scrub: 1,
+        toggleActions: 'play none none reverse'
+      }
+    })
+
+    gsap.to(skill4.value, {
+      x: -30,
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      scrollTrigger: {
+        trigger: profileContainer.value,
+        start: 'top 80%',
+        end: 'top 30%',
+        scrub: 1,
+        toggleActions: 'play none none reverse'
+      }
+    })
+  }
+}
 </script>
+
+<style scoped>
+.skill-tag {
+  position: absolute;
+  z-index: 0;
+  transition:
+    transform 0.3s ease-out,
+    opacity 0.3s ease-out;
+  will-change: transform, opacity;
+}
+
+.scroll-trigger .skill-tag {
+  z-index: 2;
+}
+</style>
