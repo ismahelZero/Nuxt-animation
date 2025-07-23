@@ -6,7 +6,7 @@ export default defineAppConfig({
       prefix: string,
       provider: string
     ) => {
-      if (prefix !== 'tabler') return content // Ignore Prefix
+      if (prefix !== 'solar') return content // Ignore Prefix
 
       return content.replace(/stroke-width="[^"]*"/g, `stroke-width="1.5"`) // Change stroke width to 2
       // .replace(/stroke="[^"]*"/g, `stroke="#FF5733"`) // Change stroke color to red

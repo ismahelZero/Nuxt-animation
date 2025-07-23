@@ -1,5 +1,5 @@
 <template>
-  <div class="font-sans text-white">
+  <div class="text-white font-sans">
     <section
       ref="animationContainer"
       class="animation-container relative h-[800vh]"
@@ -43,7 +43,7 @@
               class="absolute left-1/2 top-2/3 w-full -translate-x-1/2 -translate-y-1/2 px-4 text-center"
             >
               <button
-                class="translate-y-20 transform rounded-full bg-white px-8 py-3 text-lg font-bold text-black"
+                class="bg-white text-black translate-y-20 transform rounded-full px-8 py-3 text-lg font-bold"
               >
                 Explore Now
               </button>
@@ -51,7 +51,7 @@
           </div>
 
           <div
-            v-for="i in 14"
+            v-for="i in 15"
             :key="i"
             class="image-wrapper absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           >
@@ -119,9 +119,9 @@ const setupCinematicAnimation = () => {
     imageCanvas.value.querySelectorAll('.image-wrapper')
   ) as HTMLElement[]
   const totalImages = images.length
-  const chosenImageIndex = 7
+  const chosenImageIndex = 5
   const chosenImage = images[chosenImageIndex]
-  const circleRadius = Math.min(window.innerWidth, window.innerHeight) * 0.8
+  const circleRadius = Math.min(window.innerWidth, window.innerHeight) * 0.6
 
   // Initial random positions
   images.forEach(img => {
@@ -172,6 +172,7 @@ const setupCinematicAnimation = () => {
     const angle = (i / totalImages) * Math.PI * 2
     const x = Math.cos(angle) * circleRadius
     const y = Math.sin(angle) * circleRadius
+    const rotation = angle * (180 / Math.PI) + 90
 
     masterTl.to(
       img,
@@ -180,6 +181,7 @@ const setupCinematicAnimation = () => {
         y,
         opacity: 1,
         duration: 2,
+        rotation: rotation,
         ease: 'power2.inOut'
       },
       'toCircle'
@@ -223,14 +225,15 @@ const setupCinematicAnimation = () => {
       ease: 'none',
       onUpdate: function () {
         const progress = this.progress()
-        const currentRotation = progress * 1.5
+        const currentRotation = progress * 2.62
 
         images.forEach((img, i) => {
           const newAngle = originalAngles[i] + currentRotation
           const x = Math.cos(newAngle) * circleRadius
           const y = Math.sin(newAngle) * circleRadius
+          const rotation = newAngle * (180 / Math.PI) + 90
 
-          gsap.set(img, { x, y })
+          gsap.set(img, { x, y, rotation })
         })
       }
     },
